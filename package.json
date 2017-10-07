@@ -2,9 +2,10 @@
   "name": "react-graceful-unmount",
   "version": "1.0.0",
   "description": "A higher order component to make sure the react component passed as argument always unmounts properly, even if React does not have the time to call componentWillUnmount function.",
-  "main": "main.js",
+  "main": "./dist/bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -25,12 +26,20 @@
   ],
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0 || ^16"
-  }
-  ,
+  },
   "author": "Dorian Lupu",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hexagonalconsulting/react-graceful-unmount/issues"
   },
-  "homepage": "https://github.com/hexagonalconsulting/react-graceful-unmount#readme"
+  "homepage": "https://github.com/hexagonalconsulting/react-graceful-unmount#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.0.0",
+    "webpack": "^3.6.0"
+  }
 }
