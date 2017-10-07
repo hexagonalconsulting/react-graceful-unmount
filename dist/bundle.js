@@ -65,7 +65,10 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -546,73 +549,112 @@ module.exports = warning;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_components_with_graceful_unmount__ = __webpack_require__(7);
 
 
-/* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__src_components_with_graceful_unmount__["a" /* default */]);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _with_graceful_unmount = __webpack_require__(7);
+
+var _with_graceful_unmount2 = _interopRequireDefault(_with_graceful_unmount);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _with_graceful_unmount2.default;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = withGracefulUnmount;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+exports.default = withGracefulUnmount;
+
+var _react = __webpack_require__(8);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // this high order component will ensure that the Wrapped Component
 // will always be unmounted, even if React does not have the time to
 // call componentWillUnmount function
 function withGracefulUnmount(WrappedComponent) {
 
-    return class extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+    return function (_Component) {
+        _inherits(_class, _Component);
 
-        constructor(props) {
-            super(props);
-            this.state = { mounted: false };
-            this.componentGracefulUnmount = this.componentGracefulUnmount.bind(this);
+        function _class(props) {
+            _classCallCheck(this, _class);
+
+            var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
+
+            _this.state = { mounted: false };
+            _this.componentGracefulUnmount = _this.componentGracefulUnmount.bind(_this);
+            return _this;
         }
 
-        componentGracefulUnmount() {
-            this.setState({ mounted: false });
+        _createClass(_class, [{
+            key: 'componentGracefulUnmount',
+            value: function componentGracefulUnmount() {
+                this.setState({ mounted: false });
 
-            window.removeEventListener('beforeunload', this.componentGracefulUnmount);
-            window.removeEventListener('turbolinks:before-render', this.componentGracefulUnmount);
-        }
-
-        componentWillMount() {
-            this.setState({ mounted: true });
-        }
-
-        componentDidMount() {
-            // make sure the componentWillUnmount of the wrapped instance is executed even if React
-            // does not have the time to unmount properly. we achieve that by
-            // * hooking on beforeunload for normal page browsing
-            // * hooking on turbolinks:before-render for turbolinks page browsing
-            window.addEventListener('beforeunload', this.componentGracefulUnmount);
-            window.addEventListener('turbolinks:before-render', this.componentGracefulUnmount);
-        }
-
-        componentWillUnmount() {
-            this.componentGracefulUnmount();
-        }
-
-        render() {
-
-            let { mounted } = this.state;
-
-            if (mounted) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(WrappedComponent, this.props);
-            } else {
-                return null; // force unmount
+                window.removeEventListener('beforeunload', this.componentGracefulUnmount);
+                window.removeEventListener('turbolinks:before-render', this.componentGracefulUnmount);
             }
-        }
-    };
+        }, {
+            key: 'componentWillMount',
+            value: function componentWillMount() {
+                this.setState({ mounted: true });
+            }
+        }, {
+            key: 'componentDidMount',
+            value: function componentDidMount() {
+                // make sure the componentWillUnmount of the wrapped instance is executed even if React
+                // does not have the time to unmount properly. we achieve that by
+                // * hooking on beforeunload for normal page browsing
+                // * hooking on turbolinks:before-render for turbolinks page browsing
+                window.addEventListener('beforeunload', this.componentGracefulUnmount);
+                window.addEventListener('turbolinks:before-render', this.componentGracefulUnmount);
+            }
+        }, {
+            key: 'componentWillUnmount',
+            value: function componentWillUnmount() {
+                this.componentGracefulUnmount();
+            }
+        }, {
+            key: 'render',
+            value: function render() {
+                var mounted = this.state.mounted;
+
+
+                if (mounted) {
+                    return _react2.default.createElement(WrappedComponent, this.props);
+                } else {
+                    return null; // force unmount
+                }
+            }
+        }]);
+
+        return _class;
+    }(_react.Component);
 }
 
 /***/ }),
@@ -644,17 +686,22 @@ if (process.env.NODE_ENV === 'production') {
  LICENSE file in the root directory of this source tree.
 */
 
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var f = __webpack_require__(3),
     p = __webpack_require__(4);__webpack_require__(1);var r = __webpack_require__(2);
 function t(a) {
-  for (var b = arguments.length - 1, d = "Minified React error #" + a + "; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d" + a, e = 0; e < b; e++) d += "\x26args[]\x3d" + encodeURIComponent(arguments[e + 1]);b = Error(d + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name = "Invariant Violation";b.framesToPop = 1;throw b;
+  for (var b = arguments.length - 1, d = "Minified React error #" + a + "; visit http://facebook.github.io/react/docs/error-decoder.html?invariant\x3d" + a, e = 0; e < b; e++) {
+    d += "\x26args[]\x3d" + encodeURIComponent(arguments[e + 1]);
+  }b = Error(d + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.");b.name = "Invariant Violation";b.framesToPop = 1;throw b;
 }
-var u = { isMounted: function () {
+var u = { isMounted: function isMounted() {
     return !1;
-  }, enqueueForceUpdate: function () {}, enqueueReplaceState: function () {}, enqueueSetState: function () {} };function v(a, b, d) {
+  }, enqueueForceUpdate: function enqueueForceUpdate() {}, enqueueReplaceState: function enqueueReplaceState() {}, enqueueSetState: function enqueueSetState() {} };function v(a, b, d) {
   this.props = a;this.context = b;this.refs = p;this.updater = d || u;
 }v.prototype.isReactComponent = {};v.prototype.setState = function (a, b) {
-  "object" !== typeof a && "function" !== typeof a && null != a ? t("85") : void 0;this.updater.enqueueSetState(this, a, b, "setState");
+  "object" !== (typeof a === "undefined" ? "undefined" : _typeof(a)) && "function" !== typeof a && null != a ? t("85") : void 0;this.updater.enqueueSetState(this, a, b, "setState");
 };v.prototype.forceUpdate = function (a) {
   this.updater.enqueueForceUpdate(this, a, "forceUpdate");
 };
@@ -678,9 +725,15 @@ G.createElement = function (a, b, d) {
       g = null,
       k = null,
       m = null,
-      q = null;if (null != b) for (e in void 0 !== b.ref && (k = b.ref), void 0 !== b.key && (g = "" + b.key), m = void 0 === b.__self ? null : b.__self, q = void 0 === b.__source ? null : b.__source, b) D.call(b, e) && !F.hasOwnProperty(e) && (c[e] = b[e]);var l = arguments.length - 2;if (1 === l) c.children = d;else if (1 < l) {
-    for (var h = Array(l), n = 0; n < l; n++) h[n] = arguments[n + 2];c.children = h;
-  }if (a && a.defaultProps) for (e in l = a.defaultProps, l) void 0 === c[e] && (c[e] = l[e]);return G(a, g, k, m, q, C.current, c);
+      q = null;if (null != b) for (e in void 0 !== b.ref && (k = b.ref), void 0 !== b.key && (g = "" + b.key), m = void 0 === b.__self ? null : b.__self, q = void 0 === b.__source ? null : b.__source, b) {
+    D.call(b, e) && !F.hasOwnProperty(e) && (c[e] = b[e]);
+  }var l = arguments.length - 2;if (1 === l) c.children = d;else if (1 < l) {
+    for (var h = Array(l), n = 0; n < l; n++) {
+      h[n] = arguments[n + 2];
+    }c.children = h;
+  }if (a && a.defaultProps) for (e in l = a.defaultProps, l) {
+    void 0 === c[e] && (c[e] = l[e]);
+  }return G(a, g, k, m, q, C.current, c);
 };
 G.createFactory = function (a) {
   var b = G.createElement.bind(null, a);b.type = a;return b;
@@ -694,13 +747,17 @@ G.cloneElement = function (a, b, d) {
       k = a._self,
       m = a._source,
       q = a._owner;if (null != b) {
-    void 0 !== b.ref && (g = b.ref, q = C.current);void 0 !== b.key && (c = "" + b.key);if (a.type && a.type.defaultProps) var l = a.type.defaultProps;for (h in b) D.call(b, h) && !F.hasOwnProperty(h) && (e[h] = void 0 === b[h] && void 0 !== l ? l[h] : b[h]);
+    void 0 !== b.ref && (g = b.ref, q = C.current);void 0 !== b.key && (c = "" + b.key);if (a.type && a.type.defaultProps) var l = a.type.defaultProps;for (h in b) {
+      D.call(b, h) && !F.hasOwnProperty(h) && (e[h] = void 0 === b[h] && void 0 !== l ? l[h] : b[h]);
+    }
   }var h = arguments.length - 2;if (1 === h) e.children = d;else if (1 < h) {
-    l = Array(h);for (var n = 0; n < h; n++) l[n] = arguments[n + 2];e.children = l;
+    l = Array(h);for (var n = 0; n < h; n++) {
+      l[n] = arguments[n + 2];
+    }e.children = l;
   }return G(a.type, c, g, k, m, q, e);
 };
 G.isValidElement = function (a) {
-  return "object" === typeof a && null !== a && a.$$typeof === E;
+  return "object" === (typeof a === "undefined" ? "undefined" : _typeof(a)) && null !== a && a.$$typeof === E;
 };var H = "function" === typeof Symbol && Symbol.iterator,
     I = "function" === typeof Symbol && Symbol["for"] && Symbol["for"]("react.element") || 60103;function escape(a) {
   var b = { "\x3d": "\x3d0", ":": "\x3d2" };return "$" + ("" + a).replace(/[=:]/g, function (a) {
@@ -716,11 +773,13 @@ function L(a, b, d, e) {
   a.result = null;a.keyPrefix = null;a.func = null;a.context = null;a.count = 0;10 > K.length && K.push(a);
 }
 function N(a, b, d, e) {
-  var c = typeof a;if ("undefined" === c || "boolean" === c) a = null;if (null === a || "string" === c || "number" === c || "object" === c && a.$$typeof === I) return d(e, a, "" === b ? "." + O(a, 0) : b), 1;var g = 0;b = "" === b ? "." : b + ":";if (Array.isArray(a)) for (var k = 0; k < a.length; k++) {
+  var c = typeof a === "undefined" ? "undefined" : _typeof(a);if ("undefined" === c || "boolean" === c) a = null;if (null === a || "string" === c || "number" === c || "object" === c && a.$$typeof === I) return d(e, a, "" === b ? "." + O(a, 0) : b), 1;var g = 0;b = "" === b ? "." : b + ":";if (Array.isArray(a)) for (var k = 0; k < a.length; k++) {
     c = a[k];var m = b + O(c, k);g += N(c, m, d, e);
-  } else if (m = H && a[H] || a["@@iterator"], "function" === typeof m) for (a = m.call(a), k = 0; !(c = a.next()).done;) c = c.value, m = b + O(c, k++), g += N(c, m, d, e);else "object" === c && (d = "" + a, t("31", "[object Object]" === d ? "object with keys {" + Object.keys(a).join(", ") + "}" : d, ""));return g;
+  } else if (m = H && a[H] || a["@@iterator"], "function" === typeof m) for (a = m.call(a), k = 0; !(c = a.next()).done;) {
+    c = c.value, m = b + O(c, k++), g += N(c, m, d, e);
+  } else "object" === c && (d = "" + a, t("31", "[object Object]" === d ? "object with keys {" + Object.keys(a).join(", ") + "}" : d, ""));return g;
 }function O(a, b) {
-  return "object" === typeof a && null !== a && null != a.key ? escape(a.key) : b.toString(36);
+  return "object" === (typeof a === "undefined" ? "undefined" : _typeof(a)) && null !== a && null != a.key ? escape(a.key) : b.toString(36);
 }function P(a, b) {
   a.func.call(a.context, b, a.count++);
 }function Q(a, b, d) {
@@ -729,16 +788,16 @@ function N(a, b, d, e) {
 }
 function R(a, b, d, e, c) {
   var g = "";null != d && (g = ("" + d).replace(J, "$\x26/") + "/");b = L(b, g, e, c);null == a || N(a, "", Q, b);M(b);
-}var S = { forEach: function (a, b, d) {
+}var S = { forEach: function forEach(a, b, d) {
     if (null == a) return a;b = L(null, null, b, d);null == a || N(a, "", P, b);M(b);
-  }, map: function (a, b, d) {
+  }, map: function map(a, b, d) {
     if (null == a) return a;var e = [];R(a, e, null, b, d);return e;
-  }, count: function (a) {
+  }, count: function count(a) {
     return null == a ? 0 : N(a, "", r.thatReturnsNull, null);
-  }, toArray: function (a) {
+  }, toArray: function toArray(a) {
     var b = [];R(a, b, null, r.thatReturnsArgument);return b;
   } };
-module.exports = { Children: { map: S.map, forEach: S.forEach, count: S.count, toArray: S.toArray, only: function (a) {
+module.exports = { Children: { map: S.map, forEach: S.forEach, count: S.count, toArray: S.toArray, only: function only(a) {
       G.isValidElement(a) ? void 0 : t("143");return a;
     } }, Component: B.Component, PureComponent: B.PureComponent, unstable_AsyncComponent: B.AsyncComponent, createElement: G.createElement, cloneElement: G.cloneElement, isValidElement: G.isValidElement, createFactory: G.createFactory, version: "16.0.0", __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: { ReactCurrentOwner: C, assign: f } };
 
@@ -756,6 +815,8 @@ module.exports = { Children: { map: S.map, forEach: S.forEach, count: S.count, t
  * LICENSE file in the root directory of this source tree.
  */
 
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 if (process.env.NODE_ENV !== "production") {
   (function () {
@@ -801,7 +862,7 @@ if (process.env.NODE_ENV !== "production") {
        * @protected
        * @final
        */
-      isMounted: function (publicInstance) {
+      isMounted: function isMounted(publicInstance) {
         return false;
       },
 
@@ -820,7 +881,7 @@ if (process.env.NODE_ENV !== "production") {
        * @param {?string} callerName name of the calling function in the public API.
        * @internal
        */
-      enqueueForceUpdate: function (publicInstance, callback, callerName) {
+      enqueueForceUpdate: function enqueueForceUpdate(publicInstance, callback, callerName) {
         warnNoop(publicInstance, 'forceUpdate');
       },
 
@@ -837,7 +898,7 @@ if (process.env.NODE_ENV !== "production") {
        * @param {?string} callerName name of the calling function in the public API.
        * @internal
        */
-      enqueueReplaceState: function (publicInstance, completeState, callback, callerName) {
+      enqueueReplaceState: function enqueueReplaceState(publicInstance, completeState, callback, callerName) {
         warnNoop(publicInstance, 'replaceState');
       },
 
@@ -853,7 +914,7 @@ if (process.env.NODE_ENV !== "production") {
        * @param {?string} Name of the calling function in the public API.
        * @internal
        */
-      enqueueSetState: function (publicInstance, partialState, callback, callerName) {
+      enqueueSetState: function enqueueSetState(publicInstance, partialState, callback, callerName) {
         warnNoop(publicInstance, 'setState');
       }
     };
@@ -883,10 +944,10 @@ if (process.env.NODE_ENV !== "production") {
      * same logic and follow the same code paths.
      */
 
-    var lowPriorityWarning = function () {};
+    var lowPriorityWarning = function lowPriorityWarning() {};
 
     {
-      var printWarning = function (format) {
+      var printWarning = function printWarning(format) {
         for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
           args[_key - 1] = arguments[_key];
         }
@@ -906,7 +967,7 @@ if (process.env.NODE_ENV !== "production") {
         } catch (x) {}
       };
 
-      lowPriorityWarning = function (condition, format) {
+      lowPriorityWarning = function lowPriorityWarning(condition, format) {
         if (format === undefined) {
           throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
         }
@@ -962,7 +1023,7 @@ if (process.env.NODE_ENV !== "production") {
      * @protected
      */
     ReactComponent.prototype.setState = function (partialState, callback) {
-      !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : void 0;
+      !((typeof partialState === 'undefined' ? 'undefined' : _typeof(partialState)) === 'object' || typeof partialState === 'function' || partialState == null) ? invariant(false, 'setState(...): takes an object of state variables to update or a function which returns an object of state variables.') : void 0;
       this.updater.enqueueSetState(this, partialState, callback, 'setState');
     };
 
@@ -994,9 +1055,9 @@ if (process.env.NODE_ENV !== "production") {
         isMounted: ['isMounted', 'Instead, make sure to clean up subscriptions and pending requests in ' + 'componentWillUnmount to prevent memory leaks.'],
         replaceState: ['replaceState', 'Refactor your code to use setState instead (see ' + 'https://github.com/facebook/react/issues/3236).']
       };
-      var defineDeprecationWarning = function (methodName, info) {
+      var defineDeprecationWarning = function defineDeprecationWarning(methodName, info) {
         Object.defineProperty(ReactComponent.prototype, methodName, {
-          get: function () {
+          get: function get() {
             lowPriorityWarning_1(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]);
             return undefined;
           }
@@ -1126,7 +1187,7 @@ if (process.env.NODE_ENV !== "production") {
     }
 
     function defineKeyPropWarningGetter(props, displayName) {
-      var warnAboutAccessingKey = function () {
+      var warnAboutAccessingKey = function warnAboutAccessingKey() {
         if (!specialPropKeyWarningShown) {
           specialPropKeyWarningShown = true;
           warning$2(false, '%s: `key` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
@@ -1140,7 +1201,7 @@ if (process.env.NODE_ENV !== "production") {
     }
 
     function defineRefPropWarningGetter(props, displayName) {
-      var warnAboutAccessingRef = function () {
+      var warnAboutAccessingRef = function warnAboutAccessingRef() {
         if (!specialPropRefWarningShown) {
           specialPropRefWarningShown = true;
           warning$2(false, '%s: `ref` is not a prop. Trying to access it will result ' + 'in `undefined` being returned. If you need to access the same ' + 'value within the child component, you should pass it as a different ' + 'prop. (https://fb.me/react-special-props)', displayName);
@@ -1173,7 +1234,7 @@ if (process.env.NODE_ENV !== "production") {
      * @param {*} props
      * @internal
      */
-    var ReactElement = function (type, key, ref, self, source, owner, props) {
+    var ReactElement = function ReactElement(type, key, ref, self, source, owner, props) {
       var element = {
         // This tag allow us to uniquely identify this as a React Element
         $$typeof: REACT_ELEMENT_TYPE$1,
@@ -1400,7 +1461,7 @@ if (process.env.NODE_ENV !== "production") {
      * @final
      */
     ReactElement.isValidElement = function (object) {
-      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE$1;
+      return (typeof object === 'undefined' ? 'undefined' : _typeof(object)) === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE$1;
     };
 
     var ReactElement_1 = ReactElement;
@@ -1521,7 +1582,7 @@ if (process.env.NODE_ENV !== "production") {
      * @return {!number} The number of children in this subtree.
      */
     function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext) {
-      var type = typeof children;
+      var type = typeof children === 'undefined' ? 'undefined' : _typeof(children);
 
       if (type === 'undefined' || type === 'boolean') {
         // All of the above are perceived as null.
@@ -1616,7 +1677,7 @@ if (process.env.NODE_ENV !== "production") {
     function getComponentKey(component, index) {
       // Do some typechecking here since we call this blindly. We want to ensure
       // that we don't block potential future ES APIs.
-      if (typeof component === 'object' && component !== null && component.key != null) {
+      if ((typeof component === 'undefined' ? 'undefined' : _typeof(component)) === 'object' && component !== null && component.key != null) {
         // Explicit key
         return escape(component.key);
       }
@@ -1780,7 +1841,7 @@ if (process.env.NODE_ENV !== "production") {
      * @providesModule describeComponentFrame
      */
 
-    var describeComponentFrame$1 = function (name, source, ownerName) {
+    var describeComponentFrame$1 = function describeComponentFrame$1(name, source, ownerName) {
       return '\n    in ' + (name || 'Unknown') + (source ? ' (at ' + source.fileName.replace(/^.*[\\\/]/, '') + ':' + source.lineNumber + ')' : ownerName ? ' (created by ' + ownerName + ')' : '');
     };
 
@@ -1827,7 +1888,7 @@ if (process.env.NODE_ENV !== "production") {
 
       var currentlyValidatingElement = null;
 
-      var getDisplayName = function (element) {
+      var getDisplayName = function getDisplayName(element) {
         if (element == null) {
           return '#empty';
         } else if (typeof element === 'string' || typeof element === 'number') {
@@ -1839,7 +1900,7 @@ if (process.env.NODE_ENV !== "production") {
         }
       };
 
-      var getStackAddendum$1 = function () {
+      var getStackAddendum$1 = function getStackAddendum$1() {
         var stack = '';
         if (currentlyValidatingElement) {
           var name = getDisplayName(currentlyValidatingElement);
@@ -1942,7 +2003,7 @@ if (process.env.NODE_ENV !== "production") {
      * @param {*} parentType node's parent's type.
      */
     function validateChildKeys(node, parentType) {
-      if (typeof node !== 'object') {
+      if ((typeof node === 'undefined' ? 'undefined' : _typeof(node)) !== 'object') {
         return;
       }
       if (Array.isArray(node)) {
@@ -2000,13 +2061,13 @@ if (process.env.NODE_ENV !== "production") {
     }
 
     var ReactElementValidator$1 = {
-      createElement: function (type, props, children) {
+      createElement: function createElement(type, props, children) {
         var validType = typeof type === 'string' || typeof type === 'function';
         // We warn in this case but don't throw. We expect the element creation to
         // succeed and there will likely be errors in render.
         if (!validType) {
           var info = '';
-          if (type === undefined || typeof type === 'object' && type !== null && Object.keys(type).length === 0) {
+          if (type === undefined || (typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object' && type !== null && Object.keys(type).length === 0) {
             info += ' You likely forgot to export your component from the file ' + "it's defined in.";
           }
 
@@ -2019,7 +2080,7 @@ if (process.env.NODE_ENV !== "production") {
 
           info += ReactDebugCurrentFrame$1.getStackAddendum() || '';
 
-          warning$3(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type, info);
+          warning$3(false, 'React.createElement: type is invalid -- expected a string (for ' + 'built-in components) or a class/function (for composite ' + 'components) but got: %s.%s', type == null ? type : typeof type === 'undefined' ? 'undefined' : _typeof(type), info);
         }
 
         var element = ReactElement_1.createElement.apply(this, arguments);
@@ -2046,7 +2107,7 @@ if (process.env.NODE_ENV !== "production") {
         return element;
       },
 
-      createFactory: function (type) {
+      createFactory: function createFactory(type) {
         var validatedFactory = ReactElementValidator$1.createElement.bind(null, type);
         // Legacy hook TODO: Warn if this is accessed
         validatedFactory.type = type;
@@ -2054,7 +2115,7 @@ if (process.env.NODE_ENV !== "production") {
         {
           Object.defineProperty(validatedFactory, 'type', {
             enumerable: false,
-            get: function () {
+            get: function get() {
               lowPriorityWarning$1(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.');
               Object.defineProperty(this, 'type', {
                 value: type
@@ -2067,7 +2128,7 @@ if (process.env.NODE_ENV !== "production") {
         return validatedFactory;
       },
 
-      cloneElement: function (element, props, children) {
+      cloneElement: function cloneElement(element, props, children) {
         var newElement = ReactElement_1.cloneElement.apply(this, arguments);
         for (var i = 2; i < arguments.length; i++) {
           validateChildKeys(arguments[i], newElement.type);
@@ -2125,26 +2186,26 @@ if (process.env.NODE_ENV !== "production") {
       var itemMap = new Map();
       var rootIDSet = new Set();
 
-      setItem = function (id, item) {
+      setItem = function setItem(id, item) {
         itemMap.set(id, item);
       };
-      getItem = function (id) {
+      getItem = function getItem(id) {
         return itemMap.get(id);
       };
-      removeItem = function (id) {
+      removeItem = function removeItem(id) {
         itemMap['delete'](id);
       };
-      getItemIDs = function () {
+      getItemIDs = function getItemIDs() {
         return Array.from(itemMap.keys());
       };
 
-      addRoot = function (id) {
+      addRoot = function addRoot(id) {
         rootIDSet.add(id);
       };
-      removeRoot = function (id) {
+      removeRoot = function removeRoot(id) {
         rootIDSet['delete'](id);
       };
-      getRootIDs = function () {
+      getRootIDs = function getRootIDs() {
         return Array.from(rootIDSet.keys());
       };
     } else {
@@ -2153,38 +2214,38 @@ if (process.env.NODE_ENV !== "production") {
 
       // Use non-numeric keys to prevent V8 performance issues:
       // https://github.com/facebook/react/pull/7232
-      var getKeyFromID = function (id) {
+      var getKeyFromID = function getKeyFromID(id) {
         return '.' + id;
       };
-      var getIDFromKey = function (key) {
+      var getIDFromKey = function getIDFromKey(key) {
         return parseInt(key.substr(1), 10);
       };
 
-      setItem = function (id, item) {
+      setItem = function setItem(id, item) {
         var key = getKeyFromID(id);
         itemByKey[key] = item;
       };
-      getItem = function (id) {
+      getItem = function getItem(id) {
         var key = getKeyFromID(id);
         return itemByKey[key];
       };
-      removeItem = function (id) {
+      removeItem = function removeItem(id) {
         var key = getKeyFromID(id);
         delete itemByKey[key];
       };
-      getItemIDs = function () {
+      getItemIDs = function getItemIDs() {
         return Object.keys(itemByKey).map(getIDFromKey);
       };
 
-      addRoot = function (id) {
+      addRoot = function addRoot(id) {
         var key = getKeyFromID(id);
         rootByKey[key] = true;
       };
-      removeRoot = function (id) {
+      removeRoot = function removeRoot(id) {
         var key = getKeyFromID(id);
         delete rootByKey[key];
       };
-      getRootIDs = function () {
+      getRootIDs = function getRootIDs() {
         return Object.keys(rootByKey).map(getIDFromKey);
       };
     }
@@ -2227,7 +2288,7 @@ if (process.env.NODE_ENV !== "production") {
     }
 
     var ReactComponentTreeHook = {
-      onSetChildren: function (id, nextChildIDs) {
+      onSetChildren: function onSetChildren(id, nextChildIDs) {
         var item = getItem(id);
         !item ? invariant(false, 'Item must have been set') : void 0;
         item.childIDs = nextChildIDs;
@@ -2236,7 +2297,7 @@ if (process.env.NODE_ENV !== "production") {
           var nextChildID = nextChildIDs[i];
           var nextChild = getItem(nextChildID);
           !nextChild ? invariant(false, 'Expected hook events to fire for the child before its parent includes it in onSetChildren().') : void 0;
-          !(nextChild.childIDs != null || typeof nextChild.element !== 'object' || nextChild.element == null) ? invariant(false, 'Expected onSetChildren() to fire for a container child before its parent includes it in onSetChildren().') : void 0;
+          !(nextChild.childIDs != null || _typeof(nextChild.element) !== 'object' || nextChild.element == null) ? invariant(false, 'Expected onSetChildren() to fire for a container child before its parent includes it in onSetChildren().') : void 0;
           !nextChild.isMounted ? invariant(false, 'Expected onMountComponent() to fire for the child before its parent includes it in onSetChildren().') : void 0;
           if (nextChild.parentID == null) {
             nextChild.parentID = id;
@@ -2247,7 +2308,7 @@ if (process.env.NODE_ENV !== "production") {
           !(nextChild.parentID === id) ? invariant(false, 'Expected onBeforeMountComponent() parent and onSetChildren() to be consistent (%s has parents %s and %s).', nextChildID, nextChild.parentID, id) : void 0;
         }
       },
-      onBeforeMountComponent: function (id, element, parentID) {
+      onBeforeMountComponent: function onBeforeMountComponent(id, element, parentID) {
         var item = {
           element: element,
           parentID: parentID,
@@ -2258,7 +2319,7 @@ if (process.env.NODE_ENV !== "production") {
         };
         setItem(id, item);
       },
-      onBeforeUpdateComponent: function (id, element) {
+      onBeforeUpdateComponent: function onBeforeUpdateComponent(id, element) {
         var item = getItem(id);
         if (!item || !item.isMounted) {
           // We may end up here as a result of setState() in componentWillUnmount().
@@ -2267,7 +2328,7 @@ if (process.env.NODE_ENV !== "production") {
         }
         item.element = element;
       },
-      onMountComponent: function (id) {
+      onMountComponent: function onMountComponent(id) {
         var item = getItem(id);
         !item ? invariant(false, 'Item must have been set') : void 0;
         item.isMounted = true;
@@ -2276,7 +2337,7 @@ if (process.env.NODE_ENV !== "production") {
           addRoot(id);
         }
       },
-      onUpdateComponent: function (id) {
+      onUpdateComponent: function onUpdateComponent(id) {
         var item = getItem(id);
         if (!item || !item.isMounted) {
           // We may end up here as a result of setState() in componentWillUnmount().
@@ -2285,7 +2346,7 @@ if (process.env.NODE_ENV !== "production") {
         }
         item.updateCount++;
       },
-      onUnmountComponent: function (id) {
+      onUnmountComponent: function onUnmountComponent(id) {
         var item = getItem(id);
         if (item) {
           // We need to check if it exists.
@@ -2301,7 +2362,7 @@ if (process.env.NODE_ENV !== "production") {
         }
         unmountedIDs.push(id);
       },
-      purgeUnmountedComponents: function () {
+      purgeUnmountedComponents: function purgeUnmountedComponents() {
         if (ReactComponentTreeHook._preventPurging) {
           // Should only be used for testing.
           return;
@@ -2313,11 +2374,11 @@ if (process.env.NODE_ENV !== "production") {
         }
         unmountedIDs.length = 0;
       },
-      isMounted: function (id) {
+      isMounted: function isMounted(id) {
         var item = getItem(id);
         return item ? item.isMounted : false;
       },
-      getCurrentStackAddendum: function () {
+      getCurrentStackAddendum: function getCurrentStackAddendum() {
         var info = '';
         var currentOwner = ReactCurrentOwner_1.current;
         if (currentOwner) {
@@ -2328,7 +2389,7 @@ if (process.env.NODE_ENV !== "production") {
         }
         return info;
       },
-      getStackAddendumByID: function (id) {
+      getStackAddendumByID: function getStackAddendumByID(id) {
         var info = '';
         while (id) {
           info += describeID(id);
@@ -2336,39 +2397,39 @@ if (process.env.NODE_ENV !== "production") {
         }
         return info;
       },
-      getChildIDs: function (id) {
+      getChildIDs: function getChildIDs(id) {
         var item = getItem(id);
         return item ? item.childIDs : [];
       },
-      getDisplayName: function (id) {
+      getDisplayName: function getDisplayName(id) {
         var element = ReactComponentTreeHook.getElement(id);
         if (!element) {
           return null;
         }
         return getDisplayName$1(element);
       },
-      getElement: function (id) {
+      getElement: function getElement(id) {
         var item = getItem(id);
         return item ? item.element : null;
       },
-      getOwnerID: function (id) {
+      getOwnerID: function getOwnerID(id) {
         var element = ReactComponentTreeHook.getElement(id);
         if (!element || !element._owner) {
           return null;
         }
         return element._owner._debugID;
       },
-      getParentID: function (id) {
+      getParentID: function getParentID(id) {
         var item = getItem(id);
         return item ? item.parentID : null;
       },
-      getSource: function (id) {
+      getSource: function getSource(id) {
         var item = getItem(id);
         var element = item ? item.element : null;
         var source = element != null ? element._source : null;
         return source;
       },
-      getText: function (id) {
+      getText: function getText(id) {
         var element = ReactComponentTreeHook.getElement(id);
         if (typeof element === 'string') {
           return element;
@@ -2378,7 +2439,7 @@ if (process.env.NODE_ENV !== "production") {
           return null;
         }
       },
-      getUpdateCount: function (id) {
+      getUpdateCount: function getUpdateCount(id) {
         var item = getItem(id);
         return item ? item.updateCount : 0;
       },
@@ -2457,6 +2518,8 @@ if (process.env.NODE_ENV !== "production") {
 
 
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(1);
   var warning = __webpack_require__(5);
@@ -2486,12 +2549,12 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         try {
           // This is intentionally an invariant that gets caught. It's the same
           // behavior as without this statement except with a better message.
-          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, _typeof(typeSpecs[typeSpecName]));
           error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
         } catch (ex) {
           error = ex;
         }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error === 'undefined' ? 'undefined' : _typeof(error));
         if (error instanceof Error && !(error.message in loggedTypeFailures)) {
           // Only monitor this failure once because there tends to be a lot of the
           // same error.
