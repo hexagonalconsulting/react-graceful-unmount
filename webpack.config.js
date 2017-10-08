@@ -7,7 +7,9 @@ const config = {
 
   output: {
     path: path.resolve('dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    library: 'withGracefulUnmount',
+    libraryTarget: 'umd'
   },
 
   module: {
