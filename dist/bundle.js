@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["withGracefulUnmount"] = factory();
+	else
+		root["withGracefulUnmount"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -554,17 +564,13 @@ module.exports = warning;
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _with_graceful_unmount = __webpack_require__(7);
 
 var _with_graceful_unmount2 = _interopRequireDefault(_with_graceful_unmount);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = _with_graceful_unmount2.default;
+module.exports = _with_graceful_unmount2.default;
 
 /***/ }),
 /* 7 */
@@ -2592,3 +2598,4 @@ module.exports = ReactPropTypesSecret;
 
 /***/ })
 /******/ ]);
+});
