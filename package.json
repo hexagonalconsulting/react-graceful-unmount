@@ -1,6 +1,6 @@
 {
   "name": "react-graceful-unmount",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A higher order component to make sure the react component passed as argument always unmounts properly, even if React does not have the time to call componentWillUnmount function.",
   "main": "./dist/bundle.js",
   "scripts": {
