@@ -30,6 +30,12 @@ Example:
     import React, {Component} from 'react'
     
     class YourComponent extends Component {
+        
+        componentWillUnmount() {
+           // This function will always be called.
+           console.log('running componentWillUnmount() in YourComponent') 
+        }
+        
         render() {
             return <div> Hello World </div>
         }
