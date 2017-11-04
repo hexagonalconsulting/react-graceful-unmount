@@ -4,6 +4,7 @@ import { mount } from 'enzyme';
 // this configuration code has to run in order to configure the enzyme adapter.
 import  '../configuration'
 import sinon from 'sinon';
+import simulant from 'simulant';
 
 import HelloJest from '../../src/components/HelloJest'
 import withGracefulUnmount from '../../src/components/with_graceful_unmount'
@@ -68,6 +69,41 @@ describe('withGracefulUnmount', ()  => {
       expect(sinonSpiesWindow.calledWith('turbolinks:before-render')).toBe(true);
 
     });
+
+    describe('componentGracefulUnmount', () => {
+
+      test( 'it calls the componentGracefulUnmount  on unmount', () => {
+
+        sinon.spy(WrappedHelloJest.prototype, 'componentGracefulUnmount');
+
+        const mountedWrapper = mount(<WrappedHelloJest />);
+        mountedWrapper.unmount()
+
+        expect(WrappedHelloJest.prototype.componentGracefulUnmount.calledOnce).toBe(true);
+
+      });
+
+      test( 'it calls the componentGracefulUnmount  on firing of the "beforeunload" event', () => {
+
+        const mountedWrapper = mount(<WrappedHelloJest />);
+
+        simulant(window, 'beforeunload');
+
+        expect(WrappedHelloJest.prototype.componentGracefulUnmount.calledOnce).toBe(true);
+
+      });
+
+      test( 'it calls the componentGracefulUnmount  on firing of the "turbolinks:before-render" event', () => {
+
+        const mountedWrapper = mount(<WrappedHelloJest />);
+
+        simulant(window, 'turbolinks:before-render');
+
+        expect(WrappedHelloJest.prototype.componentGracefulUnmount.calledOnce).toBe(true);
+
+      });
+
+    })
 
   })
 
